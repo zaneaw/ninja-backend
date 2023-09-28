@@ -15,8 +15,11 @@ import { CreateNinjaDto } from './dto/create-ninja.dto';
 import { UpdateNinjaDto } from './dto/update-ninja.dto';
 import { NinjasService } from './ninjas.service';
 import { ValidationPipe } from '@nestjs/common/pipes';
+import { UseGuards } from '@nestjs/common/decorators';
+import { BeltGuard } from '../belt/belt.guard';
 
 @Controller('ninjas')
+// @UseGuards(BeltGuard) // protect all ninja routes
 export class NinjasController {
   constructor(private readonly ninjasService: NinjasService) {}
 
@@ -38,6 +41,7 @@ export class NinjasController {
 
   // POST /ninjas
   @Post()
+  @UseGuards(BeltGuard) // only allow
   createNinja(@Body(new ValidationPipe()) createNinjaDto: CreateNinjaDto) {
     try {
       return this.ninjasService.createNinja(createNinjaDto);
