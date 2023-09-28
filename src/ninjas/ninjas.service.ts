@@ -32,7 +32,16 @@ export class NinjasService {
 
   createNinja(createNinjaDto: CreateNinjaDto) {
     if (!createNinjaDto.name || !createNinjaDto.weapon) {
-      throw new Error('Missing name or weapon');
+      throw new Error('Missing name');
+    }
+    if (!createNinjaDto.weapon) {
+      throw new Error('Missing weapon');
+    }
+    if (
+      createNinjaDto.weapon !== 'stars' &&
+      createNinjaDto.weapon !== 'nunchucks'
+    ) {
+      throw new Error('Invalid weapon');
     }
 
     const newNinja = {
@@ -47,6 +56,10 @@ export class NinjasService {
 
   updateNinja(id: number, updateNinjaDto: UpdateNinjaDto) {
     const ninja = this.getNinja(id);
+
+    if (!ninja) {
+      throw new Error('Ninja not found');
+    }
 
     const updatedNinja = {
       ...ninja,
