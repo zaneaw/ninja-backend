@@ -37,10 +37,10 @@ export class NinjasController {
 
   // PUT /ninjas/:id --> { ... }
   @Put(':id')
-  updateNinja(@Param('id') id: string, @Body() UpdateNinjaDto: UpdateNinjaDto) {
+  updateNinja(@Param('id') id: string, @Body() updateNinjaDto: UpdateNinjaDto) {
     return {
       id,
-      name: UpdateNinjaDto.name,
+      name: updateNinjaDto.name,
     };
   }
 
