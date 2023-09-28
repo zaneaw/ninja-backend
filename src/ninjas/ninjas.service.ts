@@ -37,12 +37,6 @@ export class NinjasService {
     if (!createNinjaDto.weapon) {
       throw new Error('Missing weapon');
     }
-    if (
-      createNinjaDto.weapon !== 'stars' &&
-      createNinjaDto.weapon !== 'nunchucks'
-    ) {
-      throw new Error('Invalid weapon');
-    }
 
     const newNinja = {
       ...createNinjaDto,
